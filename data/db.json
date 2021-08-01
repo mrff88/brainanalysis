@@ -1,0 +1,44 @@
+{
+    "users": [
+      {
+        "id": "1",
+        "nombres": "Erick Franco",
+        "apellidos": "Del Castillo Deza",
+        "DNI": "47809227",
+        "email": "mrff88@gmail.com",
+        "admin": 0,
+        "password": "e10adc3949ba59abbe56e057f20f883e",
+        "status": 1
+      },
+      {
+        "id": "2",
+        "nombres": "Luis Enrique",
+        "apellidos": "Ttito Quiroz",
+        "DNI": "12345678",
+        "email": "ttito@gmail.com",
+        "admin": 1,
+        "password": "c33367701511b4f6020ec61ded352059",
+        "status": 1
+      }
+    ],
+    "patients": [
+      {
+        "id": "3",
+        "nombres": "Elmer Danny",
+        "apellidos": "Huamani Melo",
+        "DNI": "14785236" 
+      },
+      {
+        "id": "4",
+        "nombres": "Alexander",
+        "apellidos": "Sauni Paucalla",
+        "DNI": "96321458" 
+      },
+      {
+        "id": "5",
+        "nombres": "Josue Nahum",
+        "apellidos": "Rampas Carrion",
+        "DNI": "78912345" 
+      }
+    ]
+  }
