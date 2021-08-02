@@ -1,15 +1,48 @@
 html, body {
     height: 100%;
+    margin: 0;
 }
 body {
     background-color: #f5f5f5;
 }
 div#root {
     height: 100%;
-    padding-top: 40px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 40px;
 }
 div.Routes {
+    display: flex;
+    flex-flow: column;
     height: 100%;
+}
+nav {
+    flex: 0 1 auto;
+}
+div.medico {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+div.admin {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+div.patient-list {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+div.user-list {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+div.psearch {
+    flex: 0 1 auto;
+}
+div.plist {
+    flex: 1 1 auto;
+}
+div.paginacion {
+    flex: 0 1 auto;
 }

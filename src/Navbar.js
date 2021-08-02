@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Navbar = ({ setToken, token }) => {
     const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+    let history = useHistory();
 
     const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
     const logOut = () => {
         setToken({ token: undefined });
+        history.push('/');
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

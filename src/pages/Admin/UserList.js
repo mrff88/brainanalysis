@@ -21,13 +21,13 @@ function GlobalFilter({
                     setValue(e.target.value);
                     onChange(e.target.value);
                 }}
-                placeholder={count === 1 ? `${count} Paciente...` : `${count} Pacientes...`}
+                placeholder={count === 1 ? `${count} Usuario...` : `${count} Usuarios...`}
             />
         </span>
     )
 }
 
-const PatientList = ({ columns, patients }) => {
+const UserList = ({ columns, users }) => {
     const {
         getTableProps,
         getTableBodyProps,
@@ -50,7 +50,7 @@ const PatientList = ({ columns, patients }) => {
     } = useTable(
         {
             columns,
-            data: patients,
+            data: users,
             initialState: { pageIndex: 0, pageSize: 5 },
         },
         useFilters,
@@ -58,15 +58,26 @@ const PatientList = ({ columns, patients }) => {
         usePagination
     )
 
+    function renderSwitch(value, fn) {
+        switch (value.column.id) {
+            case 'admin':
+                return value.row.original.admin === 1 ? "Administrador" : "Medico";
+            case 'status':
+                return value.row.original.status === 1 ? "Activo" : "Inactivo";
+            default:
+                return fn;
+        }
+    }
+
     return (
-        <div className="patient-list mt-3 px-3">
+        <div className="user-list mt-3 px-3">
             <div className="psearch d-flex flex-row justify-content-between">
                 <GlobalFilter
                     preGlobalFilteredRows={preGlobalFilteredRows}
                     globalFilter={state.globalFilter}
                     setGlobalFilter={setGlobalFilter}
                 />
-                <button className="btn btn-primary">Agregar Paciente</button>
+                <button className="btn btn-primary">Agregar Usuario</button>
             </div>
             <div className="plist">
                 <table className=" table mt-3" {...getTableProps()}>
@@ -87,7 +98,7 @@ const PatientList = ({ columns, patients }) => {
                             return (
                                 <tr {...row.getRowProps()}>
                                     {row.cells.map(cell => {
-                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        return <td {...cell.getCellProps()}>{ renderSwitch(cell, cell.render('Cell')) }</td>
                                     })}
                                 </tr>
                             )
@@ -151,4 +162,4 @@ const PatientList = ({ columns, patients }) => {
     );
 }
 
-export default PatientList;
+export default UserList;

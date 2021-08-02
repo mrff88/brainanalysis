@@ -46,7 +46,6 @@ const Login = ({ setToken }) => {
         e.preventDefault();
         const token = await loginUser(email, md5(password));
         setToken({ token: token[0].admin === 1 ? 'admin' : 'medico' });
-        console.log(token);
         history.push(token[0].admin === 1 ? '/admin' : '/medico')
     }
 
