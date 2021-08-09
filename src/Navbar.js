@@ -22,7 +22,7 @@ const Navbar = ({ setToken, token }) => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/">Inicio</Link>
                         </li>
-                        {token === 'medico' ? (
+                        {token.token === 'medico' ? (
                             <li className="nav-item">
                                 <Link className="nav-link" to="/medico/diagnosticar">Diagnosticar</Link>
                             </li>

@@ -2,51 +2,50 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import md5 from 'md5';
 import './Login.css';
-import { useHistory } from "react-router-dom";
-
-async function loginUser(email, password) {
-    // return fetch(`http://localhost:8000/users?email=${email}&password=${password}`)
-    // .then(res => {
-    //   if (!res.ok) {
-    //     error = 'could not fetch the data for that resource';
-    //   }
-    //   return res.json();
-    // })
-    // .then(data => {
-    //   if (data.length > 0) {
-    //     let usuario = data[0];
-    //     user = usuario.admin;
-    //     isPending = false;
-    //     error = null;
-    //   } else {
-    //     isPending = false;
-    //     error = 'El usuario o la contraseña no son correctos';
-    //   }
-    // })
-    // .catch(err => {
-    //   if (err.name === 'AbortError') {
-    //     console.log('fetch aborted');
-    //   } else {
-    //     isPending = false;
-    //     error = err.message;
-    //   }
-    // });
-    return fetch(`http://localhost:8000/users?email=${email}&password=${password}`)
-        .then(data => data.json())
-}
 
 const Login = ({ setToken }) => {
-    let history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [isPending, setIsPending] = useState(false);
-    // const [error, setError] = useState(null);
+    const [isPending, setIsPending] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await loginUser(email, md5(password));
-        setToken({ token: token[0].admin === 1 ? 'admin' : 'medico' });
-        history.push(token[0].admin === 1 ? '/admin' : '/medico')
+        fetch(`http://localhost:8000/users?email=${email}&password=${md5(password)}`)
+            .then(res => {
+                if (!res.ok) {
+                    throw Error('could not fetch the data for that resource');
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (data.length > 0) {
+                    if (data[0].status) {
+                        setIsPending(false);
+                        setError(null);
+                        setToken({
+                            token: {
+                                token: data[0].admin === 1 ? 'admin' : 'medico',
+                                data: data[0].id
+                            }
+                        });
+                    } else {
+                        setIsPending(false);
+                        setError('El usuario no esta activo');
+                    }
+                } else {
+                    setIsPending(false);
+                    setError('El usuario o la contraseña no son correctos');
+                }
+            })
+            .catch(err => {
+                if (err.name === 'AbortError') {
+                    console.log('fetch aborted');
+                } else {
+                    setIsPending(false);
+                    setError(err.message);
+                }
+            });
     }
 
     return (
@@ -79,13 +78,11 @@ const Login = ({ setToken }) => {
                             />
                             <label htmlFor="floatingPassword">Contraseña: </label>
                         </div>
-
-                        {/* {error && <div>{error}</div>} */}
                         <br />
-                        {/* {!isPending && <button className="btn btn-primary">Iniciar Sesión</button>} */}
-                        <button className="w-100 btn btn-lg btn-primary">Iniciar Sesión</button>
-                        {/* {isPending && <button className="btn btn-primary" disabled>Iniciando...</button>} */}
+                        {!isPending && <button className="w-100 btn btn-lg btn-primary">Iniciar Sesión</button>}
+                        {isPending && <button className="w-100 btn btn-lg btn-primary" disabled>Iniciando...</button>}
                     </form>
+                    {error && <div className="alert alert-danger mt-3" role="alert">{error}</div>}
                 </div>
             </div>
         </div>

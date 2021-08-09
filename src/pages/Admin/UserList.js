@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTable, useFilters, useGlobalFilter, usePagination, useAsyncDebounce } from 'react-table'
 
 function GlobalFilter({
@@ -77,7 +78,7 @@ const UserList = ({ columns, users }) => {
                     globalFilter={state.globalFilter}
                     setGlobalFilter={setGlobalFilter}
                 />
-                <button className="btn btn-primary">Agregar Usuario</button>
+                <Link to="/admin/agregar_usuario"><button className="btn btn-primary">Agregar Usuario</button></Link>
             </div>
             <div className="plist">
                 <table className=" table mt-3" {...getTableProps()}>

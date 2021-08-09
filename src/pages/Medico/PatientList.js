@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTable, useFilters, useGlobalFilter, usePagination, useAsyncDebounce } from 'react-table'
 
 function GlobalFilter({
@@ -66,7 +67,7 @@ const PatientList = ({ columns, patients }) => {
                     globalFilter={state.globalFilter}
                     setGlobalFilter={setGlobalFilter}
                 />
-                <button className="btn btn-primary">Agregar Paciente</button>
+                <Link to="/medico/agregar_paciente"><button className="btn btn-primary">Agregar Paciente</button></Link>
             </div>
             <div className="plist">
                 <table className=" table mt-3" {...getTableProps()}>

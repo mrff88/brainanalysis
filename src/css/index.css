@@ -46,3 +46,23 @@ div.plist {
 div.paginacion {
     flex: 0 1 auto;
 }
+div.agregar-paciente {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+div.agregar-usuario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+form.baform {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+div.baicon {
+    cursor: pointer;
+}
